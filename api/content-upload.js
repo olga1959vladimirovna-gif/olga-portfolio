@@ -13,9 +13,13 @@ export default async function handler(request, response) {
           throw new Error('Неверный пароль');
         }
         return {
-          allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp'],
+          allowedContentTypes: [
+            'image/jpeg', 'image/png', 'image/webp',
+            'video/mp4', 'video/quicktime', 'video/webm', 'video/x-m4v',
+            'audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/x-wav', 'audio/mp4', 'audio/ogg', 'audio/aac',
+          ],
           addRandomSuffix: true,
-          maximumSizeInBytes: 15 * 1024 * 1024,
+          maximumSizeInBytes: 300 * 1024 * 1024,
         };
       },
       onUploadCompleted: async () => {},
