@@ -584,7 +584,7 @@ h1, h2, h3 {
   width: 100%;
 }
 
-.thumb-audio {
+.portfolio-item .thumb-audio {
   background: linear-gradient(160deg, var(--aqua), var(--teal));
 }
 
