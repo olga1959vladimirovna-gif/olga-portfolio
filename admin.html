@@ -214,6 +214,24 @@
       </div>
     </div>
 
+    <div class="card" id="portfolioCard3">
+      <h2>Работа 4</h2>
+      <img class="thumb-preview" id="prev3">
+      <p class="muted">У этой работы галерея из нескольких слайдов — загрузка фото здесь заменит все слайды одним. Если нужно сохранить несколько слайдов, попросите Джоди в чате.</p>
+      <div class="field-group">
+        <label>Заменить фото (jpg/png, до 3 МБ)</label>
+        <input type="file" accept="image/*" data-portfolio-img="3">
+      </div>
+      <div class="field-group">
+        <label for="fP3Title">Название</label>
+        <input type="text" id="fP3Title">
+      </div>
+      <div class="field-group">
+        <label for="fP3Desc">Описание</label>
+        <textarea id="fP3Desc" rows="2"></textarea>
+      </div>
+    </div>
+
     <div class="card">
       <h2>Контакты</h2>
       <div class="field-group">
@@ -383,7 +401,8 @@
     portfolio: [
       { title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', image: 'images/portfolio/poleznye-zavtraki.jpg' },
       { title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', image: 'images/portfolio/portfel-premium-1.jpg' },
-      { title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', image: 'images/portfolio/formula-prompta.jpg' }
+      { title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', image: 'images/portfolio/formula-prompta.jpg' },
+      { title: 'Фитнес-резинки', desc: 'Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.', image: 'images/portfolio/fitness-resinki-1.jpg' }
     ],
     contacts: {
       email: 'olga1959vladimirovna@gmail.com',
@@ -470,7 +489,7 @@
           p1: document.getElementById('fAboutP1').value,
           p2: document.getElementById('fAboutP2').value
         },
-        portfolio: [0, 1, 2].map(function (i) {
+        portfolio: [0, 1, 2, 3].map(function (i) {
           return {
             title: document.getElementById('fP' + i + 'Title').value,
             desc: document.getElementById('fP' + i + 'Desc').value,
