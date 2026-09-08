@@ -307,12 +307,13 @@
           });
           document.querySelectorAll('[data-works]').forEach(function (container) {
             var cat = container.getAttribute('data-works');
-            var items = byCategory[cat];
-            if (!items || !items.length) return;
+            var items = (byCategory[cat] || []).filter(function (w) {
+              return (w.images || []).filter(Boolean).length;
+            });
+            if (!items.length) return;
             container.innerHTML = '';
             items.forEach(function (w) {
-              var images = (w.images || []).filter(Boolean);
-              if (!images.length) return;
+              var images = w.images.filter(Boolean);
               var btn = document.createElement('button');
               btn.type = 'button';
               btn.className = 'card portfolio-item';
