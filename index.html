@@ -368,10 +368,18 @@
               thumb.className = 'thumb';
               if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(images[0])) {
                 var vid = document.createElement('video');
-                vid.src = images[0];
+                vid.src = images[0] + '#t=0.1';
                 vid.muted = true;
+                vid.playsInline = true;
                 vid.setAttribute('preload', 'metadata');
+                vid.addEventListener('loadedmetadata', function () {
+                  try { this.currentTime = 0.1; } catch (e) {}
+                });
                 thumb.appendChild(vid);
+                var playIcon = document.createElement('span');
+                playIcon.className = 'video-play-icon';
+                playIcon.textContent = '▶';
+                thumb.appendChild(playIcon);
               } else {
                 var img = document.createElement('img');
                 img.src = images[0];
