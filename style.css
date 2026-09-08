@@ -220,6 +220,60 @@ h1, h2, h3 {
   max-width: 620px;
 }
 
+.work-category {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.work-category:first-of-type {
+  margin-top: 40px;
+}
+
+.category-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-icon {
+  font-size: 24px;
+}
+
+.category-head h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.category-tags {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--teal-dark);
+  font-weight: 600;
+}
+
+.category-soon {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #7f9aa2;
+  font-style: italic;
+}
+
+.work-category .portfolio-grid {
+  margin-top: 24px;
+}
+
 .portfolio-grid .placeholder {
   display: flex;
   flex-direction: column;
