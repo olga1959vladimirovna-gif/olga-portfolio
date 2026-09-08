@@ -231,6 +231,37 @@ h1, h2, h3 {
   min-height: 160px;
 }
 
+.portfolio-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.portfolio-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-item h3,
+.portfolio-item p {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.portfolio-item h3 {
+  margin-top: 18px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.portfolio-item p {
+  margin-top: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #3d5a63;
+}
+
 .placeholder-icon {
   font-size: 26px;
   color: var(--teal);
