@@ -261,6 +261,56 @@ h1, h2, h3 {
   font-size: 13px;
   color: var(--teal-dark);
   font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tag:hover {
+  border-color: var(--teal);
+  background: #fff;
+}
+
+.info-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 32, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.info-modal[hidden] {
+  display: none;
+}
+
+.info-modal-box {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 28px;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.info-modal-box p {
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+
+.info-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #7f9aa2;
 }
 
 .category-soon {
@@ -323,6 +373,24 @@ h1, h2, h3 {
 .portfolio-item p {
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.work-tag-badge {
+  display: inline-block;
+  margin: 14px 20px 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--foam);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.work-tag-badge + h3 {
+  margin-top: 8px;
 }
 
 .portfolio-item h3 {
@@ -518,6 +586,17 @@ footer {
   padding: 32px 24px;
   font-size: 14px;
   color: #7f9aa2;
+}
+
+.admin-link {
+  color: inherit;
+  text-decoration: none;
+  padding: 0 6px;
+  opacity: 0.5;
+}
+
+.admin-link:hover {
+  opacity: 1;
 }
 
 @media (max-width: 560px) {

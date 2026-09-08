@@ -30,7 +30,7 @@
     font-family: inherit;
     font-size: 15px;
   }
-  input[type="text"], input[type="password"], textarea {
+  input[type="text"], input[type="password"], textarea, select {
     width: 100%;
     padding: 10px 12px;
     border-radius: 8px;
@@ -356,18 +356,18 @@
   };
 
   var CATEGORIES = [
-    { key: 'images', label: 'Изображения и графика' },
-    { key: 'video', label: 'Видео' },
-    { key: 'music', label: 'Музыка' },
-    { key: 'sites', label: 'Сайты и визитки' },
-    { key: 'texts', label: 'Тексты' }
+    { key: 'images', label: 'Изображения и графика', tags: ['Карточки для маркетплейсов', 'Постеры для соцсетей', 'Поздравления', 'Фотосессии'] },
+    { key: 'video', label: 'Видео', tags: ['Видео для соцсетей', 'Обработка и улучшение качества', 'Продление роликов'] },
+    { key: 'music', label: 'Музыка', tags: ['Музыкальные треки (Suno)', 'Праздничные и поздравительные песни', 'Шуточные песни', 'Озвучка текста'] },
+    { key: 'sites', label: 'Сайты и визитки', tags: ['Лендинги', 'Визитки', 'Интернет-магазины', 'Telegram-боты'] },
+    { key: 'texts', label: 'Тексты', tags: ['Статьи', 'Переводы'] }
   ];
 
   var DEFAULT_WORKS = [
-    { id: 'w1', category: 'images', title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', images: ['images/portfolio/poleznye-zavtraki.jpg'] },
-    { id: 'w2', category: 'images', title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', images: ['images/portfolio/portfel-premium-1.jpg', 'images/portfolio/portfel-premium-2.jpg', 'images/portfolio/portfel-premium-3.jpg'] },
-    { id: 'w3', category: 'images', title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', images: ['images/portfolio/formula-prompta.jpg'] },
-    { id: 'w4', category: 'images', title: 'Фитнес-резинки', desc: 'Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.', images: ['images/portfolio/fitness-resinki-1.jpg', 'images/portfolio/fitness-resinki-2.jpg', 'images/portfolio/fitness-resinki-3.jpg', 'images/portfolio/fitness-resinki-4.jpg', 'images/portfolio/fitness-resinki-5.jpg', 'images/portfolio/fitness-resinki-6.jpg', 'images/portfolio/fitness-resinki-7.jpg', 'images/portfolio/fitness-resinki-9.jpg', 'images/portfolio/fitness-resinki-10.jpg'] }
+    { id: 'w1', category: 'images', tag: 'Карточки для маркетплейсов', title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', images: ['images/portfolio/poleznye-zavtraki.jpg'] },
+    { id: 'w2', category: 'images', tag: 'Карточки для маркетплейсов', title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', images: ['images/portfolio/portfel-premium-1.jpg', 'images/portfolio/portfel-premium-2.jpg', 'images/portfolio/portfel-premium-3.jpg'] },
+    { id: 'w3', category: 'images', tag: 'Карточки для маркетплейсов', title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', images: ['images/portfolio/formula-prompta.jpg'] },
+    { id: 'w4', category: 'images', tag: 'Карточки для маркетплейсов', title: 'Фитнес-резинки', desc: 'Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.', images: ['images/portfolio/fitness-resinki-1.jpg', 'images/portfolio/fitness-resinki-2.jpg', 'images/portfolio/fitness-resinki-3.jpg', 'images/portfolio/fitness-resinki-4.jpg', 'images/portfolio/fitness-resinki-5.jpg', 'images/portfolio/fitness-resinki-6.jpg', 'images/portfolio/fitness-resinki-7.jpg', 'images/portfolio/fitness-resinki-9.jpg', 'images/portfolio/fitness-resinki-10.jpg'] }
   ];
 
   var works = [];
@@ -420,6 +420,15 @@
           '<input type="file" accept="image/*" data-add-image="' + w.id + '">';
         card.appendChild(fileGroup);
 
+        var tagGroup = document.createElement('div');
+        tagGroup.className = 'field-group';
+        var tagOptions = '<option value="">— без подкатегории —</option>' + cat.tags.map(function (t) {
+          return '<option value="' + escapeAttr(t) + '"' + (t === w.tag ? ' selected' : '') + '>' + t + '</option>';
+        }).join('');
+        tagGroup.innerHTML = '<label>Подкатегория</label>' +
+          '<select data-field="tag" data-work="' + w.id + '">' + tagOptions + '</select>';
+        card.appendChild(tagGroup);
+
         var titleGroup = document.createElement('div');
         titleGroup.className = 'field-group';
         titleGroup.innerHTML = '<label>Название</label>' +
@@ -456,7 +465,7 @@
   document.getElementById('worksByCategory').addEventListener('click', function (e) {
     var addBtn = e.target.closest('[data-add]');
     if (addBtn) {
-      works.push({ id: genId(), category: addBtn.getAttribute('data-add'), title: '', desc: '', images: [] });
+      works.push({ id: genId(), category: addBtn.getAttribute('data-add'), tag: '', title: '', desc: '', images: [] });
       renderWorks();
       return;
     }

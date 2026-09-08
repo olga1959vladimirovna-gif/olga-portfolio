@@ -58,10 +58,10 @@
           <h3>Изображения и графика</h3>
         </div>
         <div class="category-tags">
-          <span class="tag">Карточки для маркетплейсов</span>
-          <span class="tag">Постеры для соцсетей</span>
-          <span class="tag">Поздравления</span>
-          <span class="tag">Фотосессии</span>
+          <button type="button" class="tag">Карточки для маркетплейсов</button>
+          <button type="button" class="tag">Постеры для соцсетей</button>
+          <button type="button" class="tag">Поздравления</button>
+          <button type="button" class="tag">Фотосессии</button>
         </div>
         <div class="cards portfolio-grid" data-works="images">
           <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg">
@@ -93,9 +93,9 @@
           <h3>Видео</h3>
         </div>
         <div class="category-tags">
-          <span class="tag">Видео для соцсетей</span>
-          <span class="tag">Обработка и&nbsp;улучшение качества</span>
-          <span class="tag">Продление роликов</span>
+          <button type="button" class="tag">Видео для соцсетей</button>
+          <button type="button" class="tag">Обработка и&nbsp;улучшение качества</button>
+          <button type="button" class="tag">Продление роликов</button>
         </div>
         <p class="category-soon" data-soon-for="video">Примеры скоро появятся</p>
         <div class="cards portfolio-grid" data-works="video" hidden></div>
@@ -107,10 +107,10 @@
           <h3>Музыка</h3>
         </div>
         <div class="category-tags">
-          <span class="tag">Музыкальные треки (Suno)</span>
-          <span class="tag">Праздничные и&nbsp;поздравительные песни</span>
-          <span class="tag">Шуточные песни</span>
-          <span class="tag">Озвучка текста</span>
+          <button type="button" class="tag">Музыкальные треки (Suno)</button>
+          <button type="button" class="tag">Праздничные и&nbsp;поздравительные песни</button>
+          <button type="button" class="tag">Шуточные песни</button>
+          <button type="button" class="tag">Озвучка текста</button>
         </div>
         <p class="category-soon" data-soon-for="music">Примеры скоро появятся</p>
         <div class="cards portfolio-grid" data-works="music" hidden></div>
@@ -122,10 +122,10 @@
           <h3>Сайты и визитки</h3>
         </div>
         <div class="category-tags">
-          <span class="tag">Лендинги</span>
-          <span class="tag">Визитки</span>
-          <span class="tag">Интернет-магазины</span>
-          <span class="tag">Telegram-боты</span>
+          <button type="button" class="tag">Лендинги</button>
+          <button type="button" class="tag">Визитки</button>
+          <button type="button" class="tag">Интернет-магазины</button>
+          <button type="button" class="tag">Telegram-боты</button>
         </div>
         <p class="category-soon" data-soon-for="sites">Примеры скоро появятся</p>
         <div class="cards portfolio-grid" data-works="sites" hidden></div>
@@ -137,8 +137,8 @@
           <h3>Тексты</h3>
         </div>
         <div class="category-tags">
-          <span class="tag">Статьи</span>
-          <span class="tag">Переводы</span>
+          <button type="button" class="tag">Статьи</button>
+          <button type="button" class="tag">Переводы</button>
         </div>
         <p class="category-soon" data-soon-for="texts">Примеры скоро появятся</p>
         <div class="cards portfolio-grid" data-works="texts" hidden></div>
@@ -152,6 +152,14 @@
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
     <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее фото">›</button>
     <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <div class="info-modal" id="infoModal" hidden>
+    <div class="info-modal-box">
+      <button type="button" class="info-modal-close" id="infoModalClose" aria-label="Закрыть">✕</button>
+      <p id="infoModalText"></p>
+      <a href="#contact" class="btn btn-primary" id="infoModalCta">Написать мне</a>
+    </div>
   </div>
 
   <script>
@@ -202,6 +210,26 @@
         if (e.key === 'ArrowLeft') prevBtn.click();
         if (e.key === 'ArrowRight') nextBtn.click();
       });
+
+      var infoModal = document.getElementById('infoModal');
+      var infoModalText = document.getElementById('infoModalText');
+      document.querySelectorAll('.tag').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+          var label = tag.textContent.trim();
+          var match = Array.from(document.querySelectorAll('.work-tag-badge')).find(function (b) {
+            return b.textContent.trim() === label;
+          });
+          if (match) {
+            match.closest('.portfolio-item').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            infoModalText.textContent = 'Примеры для «' + label + '» пока не добавлены. Если нужно посмотреть уже сейчас — напишите мне, покажу лично.';
+            infoModal.hidden = false;
+          }
+        });
+      });
+      document.getElementById('infoModalClose').addEventListener('click', function () { infoModal.hidden = true; });
+      infoModal.addEventListener('click', function (e) { if (e.target === infoModal) infoModal.hidden = true; });
+      document.getElementById('infoModalCta').addEventListener('click', function () { infoModal.hidden = true; });
     })();
   </script>
 
@@ -264,7 +292,7 @@
 </script>
 
 <footer>
-  <p>© 2026 Ольга Мерджанова</p>
+  <p>© 2026 Ольга Мерджанова <a href="/admin.html" class="admin-link" aria-label="Управление сайтом">·</a></p>
 </footer>
 
 <script>
@@ -329,6 +357,12 @@
               var p = document.createElement('p');
               p.textContent = w.desc || '';
               btn.appendChild(thumb);
+              if (w.tag) {
+                var badge = document.createElement('span');
+                badge.className = 'work-tag-badge';
+                badge.textContent = w.tag;
+                btn.appendChild(badge);
+              }
               btn.appendChild(h3);
               btn.appendChild(p);
               container.appendChild(btn);
