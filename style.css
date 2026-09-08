@@ -314,6 +314,31 @@ h1, h2, h3 {
   margin-top: 28px;
 }
 
+.contact-links {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  color: var(--teal-dark);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.contact-link:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
