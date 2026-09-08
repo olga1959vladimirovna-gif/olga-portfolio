@@ -339,6 +339,56 @@ h1, h2, h3 {
   color: var(--teal);
 }
 
+.lead-form {
+  margin-top: 40px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.lead-form input,
+.lead-form textarea {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.lead-form input:focus,
+.lead-form textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.lead-form .btn {
+  align-self: center;
+  border: none;
+  font: inherit;
+}
+
+.lead-form-status {
+  text-align: center;
+  font-size: 14px;
+  color: var(--teal-dark);
+  margin: 0;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;

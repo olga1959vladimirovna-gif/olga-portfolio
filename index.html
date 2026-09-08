@@ -25,8 +25,8 @@
       <img src="images/personal/photo.jpg" alt="Ольга Мерджанова">
     </div>
     <div class="badge">Ольга Мерджанова</div>
-    <h1>Инфографика для карточек товаров и обработка фото/видео с помощью ИИ</h1>
-    <p class="tagline">Помогаю продавцам на Wildberries и Ozon — делаю продающую инфографику для карточек и довожу фото/видео товаров до нужного качества. Плюс сайты, визитки и видео на заказ.</p>
+    <h1 id="editHeroTitle">Инфографика для карточек товаров и обработка фото/видео с помощью ИИ</h1>
+    <p class="tagline" id="editHeroTagline">Помогаю продавцам на Wildberries и Ozon — делаю продающую инфографику для карточек и довожу фото/видео товаров до нужного качества. Плюс сайты, визитки и видео на заказ.</p>
     <div class="hero-actions">
       <a href="#portfolio" class="btn btn-primary">Смотреть работы</a>
       <a href="#contact" class="btn btn-ghost">Обсудить проект</a>
@@ -41,8 +41,8 @@
     <div class="section-inner">
       <span class="eyebrow">Обо мне</span>
       <h2>Творчество и технологии в одном проекте</h2>
-      <p>Работаю на стыке творчества и современных инструментов: использую нейросети как часть рабочего процесса, чтобы быстро и качественно создавать сайты, визуальный контент и медиапроекты.</p>
-      <p>Ближе всего мне работа с изображениями, видео и музыкой — и я превращаю это в готовые решения: инфографику для карточек товаров, обработку фото и видео, сайты, визитки, магазины, боты.</p>
+      <p id="editAboutP1">Работаю на стыке творчества и современных инструментов: использую нейросети как часть рабочего процесса, чтобы быстро и качественно создавать сайты, визуальный контент и медиапроекты.</p>
+      <p id="editAboutP2">Ближе всего мне работа с изображениями, видео и музыкой — и я превращаю это в готовые решения: инфографику для карточек товаров, обработку фото и видео, сайты, визитки, магазины, боты.</p>
     </div>
   </section>
 
@@ -81,20 +81,20 @@
       <h2>Мои работы</h2>
       <p class="portfolio-intro">Инфографика и визуальные материалы, созданные с помощью нейросетей — для карточек товаров, соцсетей и презентаций.</p>
       <div class="cards portfolio-grid">
-        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg">
-          <span class="thumb"><img src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика"></span>
-          <h3>Полезные завтраки</h3>
-          <p>Инфографика продукта для карточки товара.</p>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg" data-portfolio-id="0">
+          <span class="thumb"><img id="editPortfolio0Img" src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика"></span>
+          <h3 id="editPortfolio0Title">Полезные завтраки</h3>
+          <p id="editPortfolio0Desc">Инфографика продукта для карточки товара.</p>
         </button>
-        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/portfel-premium-1.jpg,images/portfolio/portfel-premium-2.jpg,images/portfolio/portfel-premium-3.jpg">
-          <span class="thumb"><img src="images/portfolio/portfel-premium-1.jpg" alt="Портфель премиум — инфографика"></span>
-          <h3>Портфель премиум</h3>
-          <p>Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).</p>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/portfel-premium-1.jpg,images/portfolio/portfel-premium-2.jpg,images/portfolio/portfel-premium-3.jpg" data-portfolio-id="1">
+          <span class="thumb"><img id="editPortfolio1Img" src="images/portfolio/portfel-premium-1.jpg" alt="Портфель премиум — инфографика"></span>
+          <h3 id="editPortfolio1Title">Портфель премиум</h3>
+          <p id="editPortfolio1Desc">Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).</p>
         </button>
-        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/formula-prompta.jpg">
-          <span class="thumb"><img src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта"></span>
-          <h3>Формула универсального промпта</h3>
-          <p>Обучающая инфографика по работе с ИИ-промптами.</p>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/formula-prompta.jpg" data-portfolio-id="2">
+          <span class="thumb"><img id="editPortfolio2Img" src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта"></span>
+          <h3 id="editPortfolio2Title">Формула универсального промпта</h3>
+          <p id="editPortfolio2Desc">Обучающая инфографика по работе с ИИ-промптами.</p>
         </button>
       </div>
     </div>
@@ -165,25 +165,124 @@
       <span class="eyebrow">Контакты</span>
       <h2>Буду рада знакомству и заказам</h2>
       <p>Пишите — расскажу подробнее о работах и обсудим вашу задачу.</p>
-      <a class="btn btn-primary" href="mailto:olga1959vladimirovna@gmail.com">olga1959vladimirovna@gmail.com</a>
+      <a id="emailLink" class="btn btn-primary" href="mailto:olga1959vladimirovna@gmail.com">olga1959vladimirovna@gmail.com</a>
       <div class="contact-links">
-        <a class="contact-link" href="https://t.me/OlgaMerdjanova" target="_blank" rel="noopener">Telegram</a>
-        <a class="contact-link" href="https://wa.me/79649085822" target="_blank" rel="noopener">WhatsApp</a>
-        <!-- Добавить когда будут ссылки:
-        <a class="contact-link" href="ССЫЛКА_НА_БОТА" target="_blank" rel="noopener">Telegram-бот</a>
-        <a class="contact-link" href="ССЫЛКА_НА_САЙТ" target="_blank" rel="noopener">Сайт</a>
-        <a class="contact-link" href="ССЫЛКА_MAX" target="_blank" rel="noopener">MAX</a>
-        <a class="contact-link" href="ССЫЛКА_VK" target="_blank" rel="noopener">VK</a>
-        -->
+        <a id="linkTelegram" class="contact-link" href="https://t.me/OlgaMerdjanova" target="_blank" rel="noopener">Telegram</a>
+        <a id="linkWhatsapp" class="contact-link" href="https://wa.me/79649085822" target="_blank" rel="noopener">WhatsApp</a>
+        <a id="linkBot" class="contact-link" href="#" target="_blank" rel="noopener" hidden>Telegram-бот</a>
+        <a id="linkSite" class="contact-link" href="#" target="_blank" rel="noopener" hidden>Сайт</a>
+        <a id="linkMax" class="contact-link" href="#" target="_blank" rel="noopener" hidden>MAX</a>
+        <a id="linkVk" class="contact-link" href="#" target="_blank" rel="noopener" hidden>VK</a>
       </div>
+
+      <form id="leadForm" class="lead-form">
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="text" name="contact" placeholder="Как с вами связаться (телефон, email или Telegram)" required>
+        <textarea name="message" placeholder="Расскажите о задаче" rows="4" required></textarea>
+        <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        <p class="lead-form-status" id="leadFormStatus" hidden></p>
+      </form>
     </div>
   </section>
 
 </main>
 
+<script>
+  (function () {
+    var form = document.getElementById('leadForm');
+    var status = document.getElementById('leadFormStatus');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = Object.fromEntries(new FormData(form).entries());
+      status.hidden = false;
+      status.textContent = 'Отправляю…';
+      fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            status.textContent = 'Спасибо! Заявка отправлена, скоро отвечу.';
+            form.reset();
+          } else {
+            status.textContent = 'Ошибка: ' + (res.d.error || 'попробуйте ещё раз');
+          }
+        })
+        .catch(function () {
+          status.textContent = 'Не получилось отправить, попробуйте позже или напишите на почту.';
+        });
+    });
+  })();
+</script>
+
 <footer>
   <p>© 2026 Ольга Мерджанова</p>
 </footer>
+
+<script>
+  (function () {
+    fetch('/api/content', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (c) {
+        if (!c || !Object.keys(c).length) return;
+
+        function setText(id, value) {
+          if (!value) return;
+          var el = document.getElementById(id);
+          if (el) el.textContent = value;
+        }
+
+        function setLink(id, value) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          if (value) {
+            el.href = value;
+            el.hidden = false;
+          } else if (id !== 'linkTelegram' && id !== 'linkWhatsapp') {
+            el.hidden = true;
+          }
+        }
+
+        if (c.hero) {
+          setText('editHeroTitle', c.hero.title);
+          setText('editHeroTagline', c.hero.tagline);
+        }
+        if (c.about) {
+          setText('editAboutP1', c.about.p1);
+          setText('editAboutP2', c.about.p2);
+        }
+        if (Array.isArray(c.portfolio)) {
+          c.portfolio.forEach(function (item, i) {
+            if (!item) return;
+            setText('editPortfolio' + i + 'Title', item.title);
+            setText('editPortfolio' + i + 'Desc', item.desc);
+            if (item.image) {
+              var img = document.getElementById('editPortfolio' + i + 'Img');
+              if (img) img.src = item.image;
+              var btn = document.querySelector('[data-portfolio-id="' + i + '"]');
+              if (btn) btn.setAttribute('data-gallery', item.image);
+            }
+          });
+        }
+        if (c.contacts) {
+          if (c.contacts.email) {
+            var e = document.getElementById('emailLink');
+            if (e) { e.href = 'mailto:' + c.contacts.email; e.textContent = c.contacts.email; }
+          }
+          setLink('linkTelegram', c.contacts.telegram);
+          setLink('linkWhatsapp', c.contacts.whatsapp);
+          setLink('linkBot', c.contacts.bot);
+          setLink('linkSite', c.contacts.site);
+          setLink('linkMax', c.contacts.max);
+          setLink('linkVk', c.contacts.vk);
+        }
+      })
+      .catch(function () {});
+  })();
+</script>
 
 </body>
 </html>

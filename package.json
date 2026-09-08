@@ -1,0 +1,9 @@
+{
+  "name": "olga-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}

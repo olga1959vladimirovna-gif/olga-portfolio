@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Админ-панель — Ольга Мерджанова</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Manrope', sans-serif;
+    background: #f3f9fa;
+    color: #14313b;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  h1 { font-size: 24px; margin-bottom: 8px; }
+  h2 { font-size: 18px; margin: 0 0 16px; }
+  .muted { color: #5b7982; font-size: 14px; }
+  .card {
+    background: #fff;
+    border: 1px solid #d9e7ea;
+    border-radius: 14px;
+    padding: 22px;
+    margin-top: 20px;
+  }
+  input, textarea, button {
+    font-family: inherit;
+    font-size: 15px;
+  }
+  input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1.5px solid #d9e7ea;
+    margin-top: 6px;
+    margin-bottom: 14px;
+  }
+  label { font-weight: 600; font-size: 14px; }
+  button {
+    background: #1f7a8c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: #145a68; }
+  button.secondary {
+    background: transparent;
+    color: #1f7a8c;
+    border: 1.5px solid #d9e7ea;
+  }
+  button.danger {
+    background: transparent;
+    color: #b3413a;
+    border: 1.5px solid #eecfcd;
+  }
+  .tabs { display: flex; gap: 8px; margin-top: 24px; }
+  .tab {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1.5px solid #d9e7ea;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .tab.active { background: #1f7a8c; color: #fff; border-color: #1f7a8c; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .lead {
+    border-bottom: 1px solid #e5eef0;
+    padding: 14px 0;
+  }
+  .lead:last-child { border-bottom: none; }
+  .lead-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .lead-name { font-weight: 700; }
+  .lead-date { font-size: 13px; color: #8199a1; }
+  .lead-contact { font-size: 14px; color: #1f7a8c; font-weight: 600; margin-top: 2px; }
+  .lead-message { margin-top: 8px; white-space: pre-wrap; }
+  .lead-actions { margin-top: 10px; display: flex; gap: 8px; }
+  .badge-replied {
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #e4f4e8;
+    color: #2c7a4b;
+    font-weight: 600;
+  }
+  .field-group { margin-top: 24px; }
+  .field-group > label:first-child { display: block; font-size: 15px; margin-bottom: 4px; }
+  .thumb-preview {
+    width: 100%;
+    max-width: 240px;
+    height: 140px;
+    object-fit: contain;
+    background: #f3f9fa;
+    border: 1px solid #d9e7ea;
+    border-radius: 8px;
+    display: block;
+    margin: 8px 0;
+  }
+  #loginScreen { max-width: 360px; margin: 80px auto; text-align: center; }
+  .status-msg { font-size: 14px; margin-top: 10px; }
+  .status-msg.error { color: #b3413a; }
+  .status-msg.ok { color: #2c7a4b; }
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <h1>Админ-панель</h1>
+  <p class="muted">Введите пароль, который прислала вам Джоди.</p>
+  <input type="password" id="pwInput" placeholder="Пароль">
+  <button id="pwSubmit" style="width:100%">Войти</button>
+  <p class="status-msg error" id="loginError" hidden></p>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <h1>Админ-панель сайта</h1>
+  <p class="muted">olga-portfolio-three.vercel.app</p>
+
+  <div class="tabs">
+    <button type="button" class="tab active" data-tab="leads">Заявки</button>
+    <button type="button" class="tab" data-tab="content">Редактировать сайт</button>
+  </div>
+
+  <div class="panel active" id="panelLeads">
+    <div class="card">
+      <h2>Заявки с сайта</h2>
+      <div id="leadsList"><p class="muted">Загрузка…</p></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panelContent">
+    <div class="card">
+      <h2>Главный экран</h2>
+      <div class="field-group">
+        <label for="fHeroTitle">Заголовок</label>
+        <textarea id="fHeroTitle" rows="2"></textarea>
+      </div>
+      <div class="field-group">
+        <label for="fHeroTagline">Подзаголовок</label>
+        <textarea id="fHeroTagline" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Раздел «Обо мне»</h2>
+      <div class="field-group">
+        <label for="fAboutP1">Первый абзац</label>
+        <textarea id="fAboutP1" rows="3"></textarea>
+      </div>
+      <div class="field-group">
+        <label for="fAboutP2">Второй абзац</label>
+        <textarea id="fAboutP2" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="portfolioCard0">
+      <h2>Работа 1</h2>
+      <img class="thumb-preview" id="prev0">
+      <div class="field-group">
+        <label>Заменить фото (jpg/png, до 3 МБ)</label>
+        <input type="file" accept="image/*" data-portfolio-img="0">
+      </div>
+      <div class="field-group">
+        <label for="fP0Title">Название</label>
+        <input type="text" id="fP0Title">
+      </div>
+      <div class="field-group">
+        <label for="fP0Desc">Описание</label>
+        <textarea id="fP0Desc" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="portfolioCard1">
+      <h2>Работа 2</h2>
+      <img class="thumb-preview" id="prev1">
+      <p class="muted">У этой работы галерея из нескольких слайдов — загрузка фото здесь заменит все слайды одним. Если нужно сохранить несколько слайдов, попросите Джоди в чате.</p>
+      <div class="field-group">
+        <label>Заменить фото (jpg/png, до 3 МБ)</label>
+        <input type="file" accept="image/*" data-portfolio-img="1">
+      </div>
+      <div class="field-group">
+        <label for="fP1Title">Название</label>
+        <input type="text" id="fP1Title">
+      </div>
+      <div class="field-group">
+        <label for="fP1Desc">Описание</label>
+        <textarea id="fP1Desc" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="portfolioCard2">
+      <h2>Работа 3</h2>
+      <img class="thumb-preview" id="prev2">
+      <div class="field-group">
+        <label>Заменить фото (jpg/png, до 3 МБ)</label>
+        <input type="file" accept="image/*" data-portfolio-img="2">
+      </div>
+      <div class="field-group">
+        <label for="fP2Title">Название</label>
+        <input type="text" id="fP2Title">
+      </div>
+      <div class="field-group">
+        <label for="fP2Desc">Описание</label>
+        <textarea id="fP2Desc" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контакты</h2>
+      <div class="field-group">
+        <label for="fEmail">Email</label>
+        <input type="text" id="fEmail">
+      </div>
+      <div class="field-group">
+        <label for="fTelegram">Telegram (ссылка)</label>
+        <input type="text" id="fTelegram" placeholder="https://t.me/OlgaMerdjanova">
+      </div>
+      <div class="field-group">
+        <label for="fWhatsapp">WhatsApp (ссылка)</label>
+        <input type="text" id="fWhatsapp" placeholder="https://wa.me/79649085822">
+      </div>
+      <div class="field-group">
+        <label for="fBot">Telegram-бот (ссылка)</label>
+        <input type="text" id="fBot" placeholder="https://t.me/имя_бота">
+      </div>
+      <div class="field-group">
+        <label for="fSite">Другой сайт (ссылка)</label>
+        <input type="text" id="fSite">
+      </div>
+      <div class="field-group">
+        <label for="fMax">MAX (ссылка)</label>
+        <input type="text" id="fMax">
+      </div>
+      <div class="field-group">
+        <label for="fVk">VK (ссылка)</label>
+        <input type="text" id="fVk">
+      </div>
+    </div>
+
+    <div class="card">
+      <button id="saveContent">Сохранить и опубликовать</button>
+      <p class="status-msg" id="contentStatus"></p>
+      <p class="muted">Изменения появляются на сайте сразу после сохранения.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var PW_KEY = 'olga_admin_pw';
+  var password = localStorage.getItem(PW_KEY) || '';
+
+  var loginScreen = document.getElementById('loginScreen');
+  var app = document.getElementById('app');
+  var pwInput = document.getElementById('pwInput');
+  var loginError = document.getElementById('loginError');
+
+  function authHeaders(extra) {
+    return Object.assign({ 'x-admin-password': password }, extra || {});
+  }
+
+  function tryEnter() {
+    fetch('/api/leads', { headers: authHeaders() }).then(function (r) {
+      if (r.ok) {
+        localStorage.setItem(PW_KEY, password);
+        loginScreen.hidden = true;
+        app.hidden = false;
+        loadLeads();
+        loadContent();
+      } else {
+        loginError.textContent = 'Неверный пароль';
+        loginError.hidden = false;
+      }
+    }).catch(function () {
+      loginError.textContent = 'Ошибка сети, попробуйте ещё раз';
+      loginError.hidden = false;
+    });
+  }
+
+  document.getElementById('pwSubmit').addEventListener('click', function () {
+    password = pwInput.value.trim();
+    tryEnter();
+  });
+  pwInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { password = pwInput.value.trim(); tryEnter(); }
+  });
+
+  if (password) tryEnter();
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById('panel' + tab.getAttribute('data-tab').charAt(0).toUpperCase() + tab.getAttribute('data-tab').slice(1)).classList.add('active');
+    });
+  });
+
+  // Leads
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    return d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
+  function loadLeads() {
+    fetch('/api/leads', { headers: authHeaders() })
+      .then(function (r) { return r.json(); })
+      .then(function (leads) {
+        var container = document.getElementById('leadsList');
+        if (!leads.length) {
+          container.innerHTML = '<p class="muted">Пока нет заявок.</p>';
+          return;
+        }
+        container.innerHTML = '';
+        leads.forEach(function (lead) {
+          var el = document.createElement('div');
+          el.className = 'lead';
+          el.innerHTML =
+            '<div class="lead-top">' +
+              '<span class="lead-name">' + escapeHtml(lead.name) + (lead.replied ? ' <span class="badge-replied">отвечено</span>' : '') + '</span>' +
+              '<span class="lead-date">' + fmtDate(lead.createdAt) + '</span>' +
+            '</div>' +
+            '<div class="lead-contact">' + escapeHtml(lead.contact) + '</div>' +
+            '<div class="lead-message">' + escapeHtml(lead.message) + '</div>' +
+            '<div class="lead-actions">' +
+              '<button class="secondary" data-toggle-replied="' + lead.id + '" data-replied="' + lead.replied + '">' + (lead.replied ? 'Снять отметку' : 'Отметить отвеченным') + '</button>' +
+              '<button class="danger" data-delete="' + lead.id + '">Удалить</button>' +
+            '</div>';
+          container.appendChild(el);
+        });
+
+        container.querySelectorAll('[data-toggle-replied]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-toggle-replied');
+            var replied = btn.getAttribute('data-replied') !== 'true';
+            fetch('/api/leads', {
+              method: 'PATCH',
+              headers: authHeaders({ 'Content-Type': 'application/json' }),
+              body: JSON.stringify({ id: id, replied: replied }),
+            }).then(loadLeads);
+          });
+        });
+        container.querySelectorAll('[data-delete]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (!confirm('Удалить эту заявку?')) return;
+            var id = btn.getAttribute('data-delete');
+            fetch('/api/leads', {
+              method: 'DELETE',
+              headers: authHeaders({ 'Content-Type': 'application/json' }),
+              body: JSON.stringify({ id: id }),
+            }).then(loadLeads);
+          });
+        });
+      });
+  }
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  // Content
+  var DEFAULTS = {
+    hero: {
+      title: 'Инфографика для карточек товаров и обработка фото/видео с помощью ИИ',
+      tagline: 'Помогаю продавцам на Wildberries и Ozon — делаю продающую инфографику для карточек и довожу фото/видео товаров до нужного качества. Плюс сайты, визитки и видео на заказ.'
+    },
+    about: {
+      p1: 'Работаю на стыке творчества и современных инструментов: использую нейросети как часть рабочего процесса, чтобы быстро и качественно создавать сайты, визуальный контент и медиапроекты.',
+      p2: 'Ближе всего мне работа с изображениями, видео и музыкой — и я превращаю это в готовые решения: инфографику для карточек товаров, обработку фото и видео, сайты, визитки, магазины, боты.'
+    },
+    portfolio: [
+      { title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', image: 'images/portfolio/poleznye-zavtraki.jpg' },
+      { title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', image: 'images/portfolio/portfel-premium-1.jpg' },
+      { title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', image: 'images/portfolio/formula-prompta.jpg' }
+    ],
+    contacts: {
+      email: 'olga1959vladimirovna@gmail.com',
+      telegram: 'https://t.me/OlgaMerdjanova',
+      whatsapp: 'https://wa.me/79649085822',
+      bot: '', site: '', max: '', vk: ''
+    }
+  };
+
+  var pendingImages = {};
+
+  function loadContent() {
+    fetch('/api/content', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (c) {
+        var merged = {
+          hero: Object.assign({}, DEFAULTS.hero, c.hero),
+          about: Object.assign({}, DEFAULTS.about, c.about),
+          portfolio: DEFAULTS.portfolio.map(function (d, i) { return Object.assign({}, d, (c.portfolio || [])[i]); }),
+          contacts: Object.assign({}, DEFAULTS.contacts, c.contacts)
+        };
+        document.getElementById('fHeroTitle').value = merged.hero.title;
+        document.getElementById('fHeroTagline').value = merged.hero.tagline;
+        document.getElementById('fAboutP1').value = merged.about.p1;
+        document.getElementById('fAboutP2').value = merged.about.p2;
+        merged.portfolio.forEach(function (item, i) {
+          document.getElementById('fP' + i + 'Title').value = item.title;
+          document.getElementById('fP' + i + 'Desc').value = item.desc;
+          document.getElementById('prev' + i).src = item.image;
+        });
+        document.getElementById('fEmail').value = merged.contacts.email;
+        document.getElementById('fTelegram').value = merged.contacts.telegram;
+        document.getElementById('fWhatsapp').value = merged.contacts.whatsapp;
+        document.getElementById('fBot').value = merged.contacts.bot;
+        document.getElementById('fSite').value = merged.contacts.site;
+        document.getElementById('fMax').value = merged.contacts.max;
+        document.getElementById('fVk').value = merged.contacts.vk;
+      });
+  }
+
+  document.querySelectorAll('[data-portfolio-img]').forEach(function (input) {
+    input.addEventListener('change', function () {
+      var i = input.getAttribute('data-portfolio-img');
+      var file = input.files[0];
+      if (!file) return;
+      if (file.size > 3 * 1024 * 1024) {
+        alert('Файл больше 3 МБ, выберите файл поменьше.');
+        input.value = '';
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        var base64 = reader.result.split(',')[1];
+        pendingImages[i] = { filename: file.name, dataBase64: base64, contentType: file.type };
+        document.getElementById('prev' + i).src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  document.getElementById('saveContent').addEventListener('click', function () {
+    var status = document.getElementById('contentStatus');
+    status.className = 'status-msg';
+    status.textContent = 'Сохраняю…';
+
+    var uploads = Object.keys(pendingImages).map(function (i) {
+      return fetch('/api/content-image', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(pendingImages[i]),
+      }).then(function (r) { return r.json(); }).then(function (d) { return { i: i, url: d.url }; });
+    });
+
+    Promise.all(uploads).then(function (results) {
+      var imageOverrides = {};
+      results.forEach(function (r) { imageOverrides[r.i] = r.url; });
+
+      var payload = {
+        hero: {
+          title: document.getElementById('fHeroTitle').value,
+          tagline: document.getElementById('fHeroTagline').value
+        },
+        about: {
+          p1: document.getElementById('fAboutP1').value,
+          p2: document.getElementById('fAboutP2').value
+        },
+        portfolio: [0, 1, 2].map(function (i) {
+          return {
+            title: document.getElementById('fP' + i + 'Title').value,
+            desc: document.getElementById('fP' + i + 'Desc').value,
+            image: imageOverrides[i] || document.getElementById('prev' + i).src
+          };
+        }),
+        contacts: {
+          email: document.getElementById('fEmail').value,
+          telegram: document.getElementById('fTelegram').value,
+          whatsapp: document.getElementById('fWhatsapp').value,
+          bot: document.getElementById('fBot').value,
+          site: document.getElementById('fSite').value,
+          max: document.getElementById('fMax').value,
+          vk: document.getElementById('fVk').value
+        }
+      };
+
+      return fetch('/api/content', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(payload),
+      });
+    }).then(function (r) {
+      if (r.ok) {
+        status.textContent = 'Сохранено и опубликовано.';
+        status.className = 'status-msg ok';
+        pendingImages = {};
+      } else {
+        status.textContent = 'Ошибка сохранения.';
+        status.className = 'status-msg error';
+      }
+    }).catch(function () {
+      status.textContent = 'Ошибка сети.';
+      status.className = 'status-msg error';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
