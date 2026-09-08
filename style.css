@@ -400,6 +400,10 @@ h1, h2, h3 {
   padding: 24px;
 }
 
+.lightbox[hidden] {
+  display: none;
+}
+
 .lightbox-img {
   max-width: 90vw;
   max-height: 88vh;
