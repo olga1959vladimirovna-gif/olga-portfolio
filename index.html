@@ -81,30 +81,84 @@
       <h2>Мои работы</h2>
       <p class="portfolio-intro">Инфографика и визуальные материалы, созданные с помощью нейросетей — для карточек товаров, соцсетей и презентаций.</p>
       <div class="cards portfolio-grid">
-        <div class="card portfolio-item">
-          <a href="images/portfolio/poleznye-zavtraki.jpg" target="_blank" rel="noopener" class="thumb">
-            <img src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика">
-          </a>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg">
+          <span class="thumb"><img src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика"></span>
           <h3>Полезные завтраки</h3>
           <p>Инфографика продукта для карточки товара.</p>
-        </div>
-        <div class="card portfolio-item">
-          <a href="images/portfolio/portfel-premium.jpg" target="_blank" rel="noopener" class="thumb">
-            <img src="images/portfolio/portfel-premium.jpg" alt="Портфель премиум — инфографика">
-          </a>
+        </button>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/portfel-premium-1.jpg,images/portfolio/portfel-premium-2.jpg,images/portfolio/portfel-premium-3.jpg">
+          <span class="thumb"><img src="images/portfolio/portfel-premium-1.jpg" alt="Портфель премиум — инфографика"></span>
           <h3>Портфель премиум</h3>
-          <p>Серия инфографики для карточки товара на маркетплейсе.</p>
-        </div>
-        <div class="card portfolio-item">
-          <a href="images/portfolio/formula-prompta.jpg" target="_blank" rel="noopener" class="thumb">
-            <img src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта">
-          </a>
+          <p>Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).</p>
+        </button>
+        <button type="button" class="card portfolio-item" data-gallery="images/portfolio/formula-prompta.jpg">
+          <span class="thumb"><img src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта"></span>
           <h3>Формула универсального промпта</h3>
           <p>Обучающая инфографика по работе с ИИ-промптами.</p>
-        </div>
+        </button>
       </div>
     </div>
   </section>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</button>
+    <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее фото">›</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var counter = document.getElementById('lightboxCounter');
+      var prevBtn = document.getElementById('lightboxPrev');
+      var nextBtn = document.getElementById('lightboxNext');
+      var closeBtn = document.getElementById('lightboxClose');
+      var images = [];
+      var index = 0;
+
+      function show() {
+        lightboxImg.src = images[index];
+        var multi = images.length > 1;
+        prevBtn.hidden = !multi;
+        nextBtn.hidden = !multi;
+        counter.hidden = !multi;
+        counter.textContent = (index + 1) + ' / ' + images.length;
+      }
+
+      function open(list) {
+        images = list;
+        index = 0;
+        lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        show();
+      }
+
+      function close() {
+        lightbox.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-gallery]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          open(el.getAttribute('data-gallery').split(','));
+        });
+      });
+
+      prevBtn.addEventListener('click', function () { index = (index - 1 + images.length) % images.length; show(); });
+      nextBtn.addEventListener('click', function () { index = (index + 1) % images.length; show(); });
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (lightbox.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+      });
+    })();
+  </script>
 
   <section class="contact" id="contact">
     <div class="section-inner contact-inner">

@@ -234,6 +234,12 @@ h1, h2, h3 {
 .portfolio-item {
   padding: 0;
   overflow: hidden;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  color: inherit;
 }
 
 .portfolio-item .thumb {
@@ -306,6 +312,72 @@ h1, h2, h3 {
 
 .contact .btn {
   margin-top: 28px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 32, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 20px;
+}
+
+.lightbox-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+@media (max-width: 560px) {
+  .lightbox-nav { width: 38px; height: 38px; font-size: 18px; }
 }
 
 footer {
