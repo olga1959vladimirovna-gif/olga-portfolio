@@ -63,31 +63,27 @@
           <span class="tag">Поздравления</span>
           <span class="tag">Фотосессии</span>
         </div>
-        <div class="cards portfolio-grid">
-          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg" data-portfolio-id="0">
-            <span class="thumb"><img id="editPortfolio0Img" src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика"></span>
-            <h3 id="editPortfolio0Title">Полезные завтраки</h3>
-            <p id="editPortfolio0Desc">Инфографика продукта для карточки товара.</p>
+        <div class="cards portfolio-grid" data-works="images">
+          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/poleznye-zavtraki.jpg">
+            <span class="thumb"><img src="images/portfolio/poleznye-zavtraki.jpg" alt="Полезные завтраки — инфографика"></span>
+            <h3>Полезные завтраки</h3>
+            <p>Инфографика продукта для карточки товара.</p>
           </button>
-          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/portfel-premium-1.jpg,images/portfolio/portfel-premium-2.jpg,images/portfolio/portfel-premium-3.jpg" data-portfolio-id="1">
-            <span class="thumb"><img id="editPortfolio1Img" src="images/portfolio/portfel-premium-1.jpg" alt="Портфель премиум — инфографика"></span>
-            <h3 id="editPortfolio1Title">Портфель премиум</h3>
-            <p id="editPortfolio1Desc">Серия инфографики для карточки товара на&nbsp;маркетплейсе (3 слайда — листайте стрелками).</p>
+          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/portfel-premium-1.jpg,images/portfolio/portfel-premium-2.jpg,images/portfolio/portfel-premium-3.jpg">
+            <span class="thumb"><img src="images/portfolio/portfel-premium-1.jpg" alt="Портфель премиум — инфографика"></span>
+            <h3>Портфель премиум</h3>
+            <p>Серия инфографики для карточки товара на&nbsp;маркетплейсе (3 слайда — листайте стрелками).</p>
           </button>
-          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/formula-prompta.jpg" data-portfolio-id="2">
-            <span class="thumb"><img id="editPortfolio2Img" src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта"></span>
-            <h3 id="editPortfolio2Title">Формула универсального промпта</h3>
-            <p id="editPortfolio2Desc">Обучающая инфографика по&nbsp;работе с&nbsp;ИИ-промптами.</p>
+          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/formula-prompta.jpg">
+            <span class="thumb"><img src="images/portfolio/formula-prompta.jpg" alt="Формула универсального промпта"></span>
+            <h3>Формула универсального промпта</h3>
+            <p>Обучающая инфографика по&nbsp;работе с&nbsp;ИИ-промптами.</p>
           </button>
-          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/fitness-resinki-1.jpg,images/portfolio/fitness-resinki-2.jpg,images/portfolio/fitness-resinki-3.jpg,images/portfolio/fitness-resinki-4.jpg,images/portfolio/fitness-resinki-5.jpg,images/portfolio/fitness-resinki-6.jpg,images/portfolio/fitness-resinki-7.jpg,images/portfolio/fitness-resinki-9.jpg,images/portfolio/fitness-resinki-10.jpg" data-portfolio-id="3">
-            <span class="thumb"><img id="editPortfolio3Img" src="images/portfolio/fitness-resinki-1.jpg" alt="Фитнес-резинки — инфографика"></span>
-            <h3 id="editPortfolio3Title">Фитнес-резинки</h3>
-            <p id="editPortfolio3Desc">Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.</p>
+          <button type="button" class="card portfolio-item" data-gallery="images/portfolio/fitness-resinki-1.jpg,images/portfolio/fitness-resinki-2.jpg,images/portfolio/fitness-resinki-3.jpg,images/portfolio/fitness-resinki-4.jpg,images/portfolio/fitness-resinki-5.jpg,images/portfolio/fitness-resinki-6.jpg,images/portfolio/fitness-resinki-7.jpg,images/portfolio/fitness-resinki-9.jpg,images/portfolio/fitness-resinki-10.jpg">
+            <span class="thumb"><img src="images/portfolio/fitness-resinki-1.jpg" alt="Фитнес-резинки — инфографика"></span>
+            <h3>Фитнес-резинки</h3>
+            <p>Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.</p>
           </button>
-          <div class="card placeholder">
-            <div class="placeholder-icon">＋</div>
-            <p>Ещё примеры скоро появятся</p>
-          </div>
         </div>
       </div>
 
@@ -101,7 +97,8 @@
           <span class="tag">Обработка и&nbsp;улучшение качества</span>
           <span class="tag">Продление роликов</span>
         </div>
-        <p class="category-soon">Примеры скоро появятся</p>
+        <p class="category-soon" data-soon-for="video">Примеры скоро появятся</p>
+        <div class="cards portfolio-grid" data-works="video" hidden></div>
       </div>
 
       <div class="work-category">
@@ -115,7 +112,8 @@
           <span class="tag">Шуточные песни</span>
           <span class="tag">Озвучка текста</span>
         </div>
-        <p class="category-soon">Примеры скоро появятся</p>
+        <p class="category-soon" data-soon-for="music">Примеры скоро появятся</p>
+        <div class="cards portfolio-grid" data-works="music" hidden></div>
       </div>
 
       <div class="work-category">
@@ -129,7 +127,8 @@
           <span class="tag">Интернет-магазины</span>
           <span class="tag">Telegram-боты</span>
         </div>
-        <p class="category-soon">Примеры скоро появятся</p>
+        <p class="category-soon" data-soon-for="sites">Примеры скоро появятся</p>
+        <div class="cards portfolio-grid" data-works="sites" hidden></div>
       </div>
 
       <div class="work-category">
@@ -141,7 +140,8 @@
           <span class="tag">Статьи</span>
           <span class="tag">Переводы</span>
         </div>
-        <p class="category-soon">Примеры скоро появятся</p>
+        <p class="category-soon" data-soon-for="texts">Примеры скоро появятся</p>
+        <div class="cards portfolio-grid" data-works="texts" hidden></div>
       </div>
     </div>
   </section>
@@ -187,10 +187,9 @@
         document.body.style.overflow = '';
       }
 
-      document.querySelectorAll('[data-gallery]').forEach(function (el) {
-        el.addEventListener('click', function () {
-          open(el.getAttribute('data-gallery').split(','));
-        });
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-gallery]');
+        if (el) open(el.getAttribute('data-gallery').split(','));
       });
 
       prevBtn.addEventListener('click', function () { index = (index - 1 + images.length) % images.length; show(); });
@@ -300,17 +299,42 @@
           setText('editAboutP1', c.about.p1);
           setText('editAboutP2', c.about.p2);
         }
-        if (Array.isArray(c.portfolio)) {
-          c.portfolio.forEach(function (item, i) {
-            if (!item) return;
-            setText('editPortfolio' + i + 'Title', item.title);
-            setText('editPortfolio' + i + 'Desc', item.desc);
-            if (item.image) {
-              var img = document.getElementById('editPortfolio' + i + 'Img');
-              if (img) img.src = item.image;
-              var btn = document.querySelector('[data-portfolio-id="' + i + '"]');
-              if (btn) btn.setAttribute('data-gallery', item.image);
-            }
+        if (Array.isArray(c.works) && c.works.length) {
+          var byCategory = {};
+          c.works.forEach(function (w) {
+            if (!w || !w.category) return;
+            (byCategory[w.category] = byCategory[w.category] || []).push(w);
+          });
+          document.querySelectorAll('[data-works]').forEach(function (container) {
+            var cat = container.getAttribute('data-works');
+            var items = byCategory[cat];
+            if (!items || !items.length) return;
+            container.innerHTML = '';
+            items.forEach(function (w) {
+              var images = (w.images || []).filter(Boolean);
+              if (!images.length) return;
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'card portfolio-item';
+              btn.setAttribute('data-gallery', images.join(','));
+              var thumb = document.createElement('span');
+              thumb.className = 'thumb';
+              var img = document.createElement('img');
+              img.src = images[0];
+              img.alt = w.title || '';
+              thumb.appendChild(img);
+              var h3 = document.createElement('h3');
+              h3.textContent = w.title || '';
+              var p = document.createElement('p');
+              p.textContent = w.desc || '';
+              btn.appendChild(thumb);
+              btn.appendChild(h3);
+              btn.appendChild(p);
+              container.appendChild(btn);
+            });
+            container.hidden = false;
+            var soon = document.querySelector('[data-soon-for="' + cat + '"]');
+            if (soon) soon.hidden = true;
           });
         }
         if (c.contacts) {

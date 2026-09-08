@@ -105,6 +105,19 @@
     display: block;
     margin: 8px 0;
   }
+  .work-cat-block { margin-top: 28px; }
+  .work-cat-block:first-child { margin-top: 0; }
+  .work-cat-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .work-editor { background: #f8fbfc; border: 1px solid #d9e7ea; border-radius: 12px; padding: 16px; margin-top: 12px; }
+  .work-images { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .work-img-thumb { position: relative; width: 72px; height: 72px; }
+  .work-img-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid #d9e7ea; }
+  .work-img-remove {
+    position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%;
+    background: #b3413a; color: #fff; font-size: 12px; padding: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .add-work-btn { margin-top: 4px; }
+  .empty-note { color: #7f9aa2; font-size: 14px; font-style: italic; }
   #loginScreen { max-width: 360px; margin: 80px auto; text-align: center; }
   .status-msg { font-size: 14px; margin-top: 10px; }
   .status-msg.error { color: #b3413a; }
@@ -162,74 +175,10 @@
       </div>
     </div>
 
-    <div class="card" id="portfolioCard0">
-      <h2>Работа 1</h2>
-      <img class="thumb-preview" id="prev0">
-      <div class="field-group">
-        <label>Заменить фото (jpg/png, до 3 МБ)</label>
-        <input type="file" accept="image/*" data-portfolio-img="0">
-      </div>
-      <div class="field-group">
-        <label for="fP0Title">Название</label>
-        <input type="text" id="fP0Title">
-      </div>
-      <div class="field-group">
-        <label for="fP0Desc">Описание</label>
-        <textarea id="fP0Desc" rows="2"></textarea>
-      </div>
-    </div>
-
-    <div class="card" id="portfolioCard1">
-      <h2>Работа 2</h2>
-      <img class="thumb-preview" id="prev1">
-      <p class="muted">У этой работы галерея из нескольких слайдов — загрузка фото здесь заменит все слайды одним. Если нужно сохранить несколько слайдов, попросите Джоди в чате.</p>
-      <div class="field-group">
-        <label>Заменить фото (jpg/png, до 3 МБ)</label>
-        <input type="file" accept="image/*" data-portfolio-img="1">
-      </div>
-      <div class="field-group">
-        <label for="fP1Title">Название</label>
-        <input type="text" id="fP1Title">
-      </div>
-      <div class="field-group">
-        <label for="fP1Desc">Описание</label>
-        <textarea id="fP1Desc" rows="2"></textarea>
-      </div>
-    </div>
-
-    <div class="card" id="portfolioCard2">
-      <h2>Работа 3</h2>
-      <img class="thumb-preview" id="prev2">
-      <div class="field-group">
-        <label>Заменить фото (jpg/png, до 3 МБ)</label>
-        <input type="file" accept="image/*" data-portfolio-img="2">
-      </div>
-      <div class="field-group">
-        <label for="fP2Title">Название</label>
-        <input type="text" id="fP2Title">
-      </div>
-      <div class="field-group">
-        <label for="fP2Desc">Описание</label>
-        <textarea id="fP2Desc" rows="2"></textarea>
-      </div>
-    </div>
-
-    <div class="card" id="portfolioCard3">
-      <h2>Работа 4</h2>
-      <img class="thumb-preview" id="prev3">
-      <p class="muted">У этой работы галерея из нескольких слайдов — загрузка фото здесь заменит все слайды одним. Если нужно сохранить несколько слайдов, попросите Джоди в чате.</p>
-      <div class="field-group">
-        <label>Заменить фото (jpg/png, до 3 МБ)</label>
-        <input type="file" accept="image/*" data-portfolio-img="3">
-      </div>
-      <div class="field-group">
-        <label for="fP3Title">Название</label>
-        <input type="text" id="fP3Title">
-      </div>
-      <div class="field-group">
-        <label for="fP3Desc">Описание</label>
-        <textarea id="fP3Desc" rows="2"></textarea>
-      </div>
+    <div class="card">
+      <h2>Мои работы по категориям</h2>
+      <p class="muted">Добавляйте, редактируйте или удаляйте примеры работ в каждой категории. Для галереи из нескольких слайдов — просто загрузите несколько фото в одну работу по очереди.</p>
+      <div id="worksByCategory"></div>
     </div>
 
     <div class="card">
@@ -398,12 +347,6 @@
       p1: 'Работаю на стыке творчества и современных инструментов: использую нейросети как часть рабочего процесса, чтобы быстро и качественно создавать сайты, визуальный контент и медиапроекты.',
       p2: 'Ближе всего мне работа с изображениями, видео и музыкой — и я превращаю это в готовые решения: инфографику для карточек товаров, обработку фото и видео, сайты, визитки, магазины, боты.'
     },
-    portfolio: [
-      { title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', image: 'images/portfolio/poleznye-zavtraki.jpg' },
-      { title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', image: 'images/portfolio/portfel-premium-1.jpg' },
-      { title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', image: 'images/portfolio/formula-prompta.jpg' },
-      { title: 'Фитнес-резинки', desc: 'Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.', image: 'images/portfolio/fitness-resinki-1.jpg' }
-    ],
     contacts: {
       email: 'olga1959vladimirovna@gmail.com',
       telegram: 'https://t.me/OlgaMerdjanova',
@@ -412,7 +355,172 @@
     }
   };
 
-  var pendingImages = {};
+  var CATEGORIES = [
+    { key: 'images', label: 'Изображения и графика' },
+    { key: 'video', label: 'Видео' },
+    { key: 'music', label: 'Музыка' },
+    { key: 'sites', label: 'Сайты и визитки' },
+    { key: 'texts', label: 'Тексты' }
+  ];
+
+  var DEFAULT_WORKS = [
+    { id: 'w1', category: 'images', title: 'Полезные завтраки', desc: 'Инфографика продукта для карточки товара.', images: ['images/portfolio/poleznye-zavtraki.jpg'] },
+    { id: 'w2', category: 'images', title: 'Портфель премиум', desc: 'Серия инфографики для карточки товара на маркетплейсе (3 слайда — листайте стрелками).', images: ['images/portfolio/portfel-premium-1.jpg', 'images/portfolio/portfel-premium-2.jpg', 'images/portfolio/portfel-premium-3.jpg'] },
+    { id: 'w3', category: 'images', title: 'Формула универсального промпта', desc: 'Обучающая инфографика по работе с ИИ-промптами.', images: ['images/portfolio/formula-prompta.jpg'] },
+    { id: 'w4', category: 'images', title: 'Фитнес-резинки', desc: 'Полная карточка товара для маркетплейса, 9 слайдов — листайте стрелками.', images: ['images/portfolio/fitness-resinki-1.jpg', 'images/portfolio/fitness-resinki-2.jpg', 'images/portfolio/fitness-resinki-3.jpg', 'images/portfolio/fitness-resinki-4.jpg', 'images/portfolio/fitness-resinki-5.jpg', 'images/portfolio/fitness-resinki-6.jpg', 'images/portfolio/fitness-resinki-7.jpg', 'images/portfolio/fitness-resinki-9.jpg', 'images/portfolio/fitness-resinki-10.jpg'] }
+  ];
+
+  var works = [];
+
+  function genId() {
+    return 'w' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  function escapeAttr(s) {
+    return (s || '').replace(/"/g, '&quot;');
+  }
+
+  function renderWorks() {
+    var root = document.getElementById('worksByCategory');
+    root.innerHTML = '';
+    CATEGORIES.forEach(function (cat) {
+      var block = document.createElement('div');
+      block.className = 'work-cat-block';
+      var title = document.createElement('div');
+      title.className = 'work-cat-title';
+      title.textContent = cat.label;
+      block.appendChild(title);
+
+      var items = works.filter(function (w) { return w.category === cat.key; });
+      if (!items.length) {
+        var empty = document.createElement('p');
+        empty.className = 'empty-note';
+        empty.textContent = 'Пока нет работ в этой категории.';
+        block.appendChild(empty);
+      }
+
+      items.forEach(function (w) {
+        var card = document.createElement('div');
+        card.className = 'work-editor';
+
+        var imagesRow = document.createElement('div');
+        imagesRow.className = 'work-images';
+        (w.images || []).forEach(function (url, idx) {
+          var thumb = document.createElement('div');
+          thumb.className = 'work-img-thumb';
+          thumb.innerHTML = '<img src="' + escapeAttr(url) + '">' +
+            '<button type="button" class="work-img-remove" data-remove-image="' + w.id + '::' + idx + '">×</button>';
+          imagesRow.appendChild(thumb);
+        });
+        card.appendChild(imagesRow);
+
+        var fileGroup = document.createElement('div');
+        fileGroup.className = 'field-group';
+        fileGroup.innerHTML = '<label>Добавить фото (можно несколько подряд — для галереи)</label>' +
+          '<input type="file" accept="image/*" data-add-image="' + w.id + '">';
+        card.appendChild(fileGroup);
+
+        var titleGroup = document.createElement('div');
+        titleGroup.className = 'field-group';
+        titleGroup.innerHTML = '<label>Название</label>' +
+          '<input type="text" data-field="title" data-work="' + w.id + '" value="' + escapeAttr(w.title) + '">';
+        card.appendChild(titleGroup);
+
+        var descGroup = document.createElement('div');
+        descGroup.className = 'field-group';
+        descGroup.innerHTML = '<label>Описание</label>' +
+          '<textarea rows="2" data-field="desc" data-work="' + w.id + '">' + (w.desc || '') + '</textarea>';
+        card.appendChild(descGroup);
+
+        var removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'danger';
+        removeBtn.textContent = 'Удалить работу';
+        removeBtn.setAttribute('data-remove-work', w.id);
+        card.appendChild(removeBtn);
+
+        block.appendChild(card);
+      });
+
+      var addBtn = document.createElement('button');
+      addBtn.type = 'button';
+      addBtn.className = 'secondary add-work-btn';
+      addBtn.textContent = '+ Добавить работу в «' + cat.label + '»';
+      addBtn.setAttribute('data-add', cat.key);
+      block.appendChild(addBtn);
+
+      root.appendChild(block);
+    });
+  }
+
+  document.getElementById('worksByCategory').addEventListener('click', function (e) {
+    var addBtn = e.target.closest('[data-add]');
+    if (addBtn) {
+      works.push({ id: genId(), category: addBtn.getAttribute('data-add'), title: '', desc: '', images: [] });
+      renderWorks();
+      return;
+    }
+    var rmWork = e.target.closest('[data-remove-work]');
+    if (rmWork) {
+      if (!confirm('Удалить эту работу?')) return;
+      var id = rmWork.getAttribute('data-remove-work');
+      works = works.filter(function (w) { return w.id !== id; });
+      renderWorks();
+      return;
+    }
+    var rmImg = e.target.closest('[data-remove-image]');
+    if (rmImg) {
+      var parts = rmImg.getAttribute('data-remove-image').split('::');
+      var w = works.find(function (x) { return x.id === parts[0]; });
+      if (w) { w.images.splice(parseInt(parts[1], 10), 1); renderWorks(); }
+      return;
+    }
+  });
+
+  document.getElementById('worksByCategory').addEventListener('input', function (e) {
+    var field = e.target.closest('[data-field]');
+    if (!field) return;
+    var w = works.find(function (x) { return x.id === field.getAttribute('data-work'); });
+    if (w) w[field.getAttribute('data-field')] = field.value;
+  });
+
+  document.getElementById('worksByCategory').addEventListener('change', function (e) {
+    var fileInput = e.target.closest('[data-add-image]');
+    if (!fileInput) return;
+    var workId = fileInput.getAttribute('data-add-image');
+    var file = fileInput.files[0];
+    if (!file) return;
+    if (file.size > 3 * 1024 * 1024) {
+      alert('Файл больше 3 МБ, выберите файл поменьше.');
+      fileInput.value = '';
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var base64 = reader.result.split(',')[1];
+      fileInput.disabled = true;
+      fetch('/api/content-image', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ filename: file.name, dataBase64: base64, contentType: file.type }),
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.url) {
+            var w = works.find(function (x) { return x.id === workId; });
+            if (w) { w.images = w.images || []; w.images.push(d.url); }
+          } else {
+            alert('Ошибка загрузки: ' + (d.error || 'попробуйте ещё раз'));
+          }
+          renderWorks();
+        })
+        .catch(function () {
+          alert('Ошибка сети при загрузке фото.');
+          renderWorks();
+        });
+    };
+    reader.readAsDataURL(file);
+  });
 
   function loadContent() {
     fetch('/api/content', { cache: 'no-store' })
@@ -421,18 +529,13 @@
         var merged = {
           hero: Object.assign({}, DEFAULTS.hero, c.hero),
           about: Object.assign({}, DEFAULTS.about, c.about),
-          portfolio: DEFAULTS.portfolio.map(function (d, i) { return Object.assign({}, d, (c.portfolio || [])[i]); }),
           contacts: Object.assign({}, DEFAULTS.contacts, c.contacts)
         };
+        works = (Array.isArray(c.works) && c.works.length) ? c.works : DEFAULT_WORKS.slice();
         document.getElementById('fHeroTitle').value = merged.hero.title;
         document.getElementById('fHeroTagline').value = merged.hero.tagline;
         document.getElementById('fAboutP1').value = merged.about.p1;
         document.getElementById('fAboutP2').value = merged.about.p2;
-        merged.portfolio.forEach(function (item, i) {
-          document.getElementById('fP' + i + 'Title').value = item.title;
-          document.getElementById('fP' + i + 'Desc').value = item.desc;
-          document.getElementById('prev' + i).src = item.image;
-        });
         document.getElementById('fEmail').value = merged.contacts.email;
         document.getElementById('fTelegram').value = merged.contacts.telegram;
         document.getElementById('fWhatsapp').value = merged.contacts.whatsapp;
@@ -440,83 +543,44 @@
         document.getElementById('fSite').value = merged.contacts.site;
         document.getElementById('fMax').value = merged.contacts.max;
         document.getElementById('fVk').value = merged.contacts.vk;
+        renderWorks();
       });
   }
-
-  document.querySelectorAll('[data-portfolio-img]').forEach(function (input) {
-    input.addEventListener('change', function () {
-      var i = input.getAttribute('data-portfolio-img');
-      var file = input.files[0];
-      if (!file) return;
-      if (file.size > 3 * 1024 * 1024) {
-        alert('Файл больше 3 МБ, выберите файл поменьше.');
-        input.value = '';
-        return;
-      }
-      var reader = new FileReader();
-      reader.onload = function () {
-        var base64 = reader.result.split(',')[1];
-        pendingImages[i] = { filename: file.name, dataBase64: base64, contentType: file.type };
-        document.getElementById('prev' + i).src = reader.result;
-      };
-      reader.readAsDataURL(file);
-    });
-  });
 
   document.getElementById('saveContent').addEventListener('click', function () {
     var status = document.getElementById('contentStatus');
     status.className = 'status-msg';
     status.textContent = 'Сохраняю…';
 
-    var uploads = Object.keys(pendingImages).map(function (i) {
-      return fetch('/api/content-image', {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify(pendingImages[i]),
-      }).then(function (r) { return r.json(); }).then(function (d) { return { i: i, url: d.url }; });
-    });
+    var payload = {
+      hero: {
+        title: document.getElementById('fHeroTitle').value,
+        tagline: document.getElementById('fHeroTagline').value
+      },
+      about: {
+        p1: document.getElementById('fAboutP1').value,
+        p2: document.getElementById('fAboutP2').value
+      },
+      works: works,
+      contacts: {
+        email: document.getElementById('fEmail').value,
+        telegram: document.getElementById('fTelegram').value,
+        whatsapp: document.getElementById('fWhatsapp').value,
+        bot: document.getElementById('fBot').value,
+        site: document.getElementById('fSite').value,
+        max: document.getElementById('fMax').value,
+        vk: document.getElementById('fVk').value
+      }
+    };
 
-    Promise.all(uploads).then(function (results) {
-      var imageOverrides = {};
-      results.forEach(function (r) { imageOverrides[r.i] = r.url; });
-
-      var payload = {
-        hero: {
-          title: document.getElementById('fHeroTitle').value,
-          tagline: document.getElementById('fHeroTagline').value
-        },
-        about: {
-          p1: document.getElementById('fAboutP1').value,
-          p2: document.getElementById('fAboutP2').value
-        },
-        portfolio: [0, 1, 2, 3].map(function (i) {
-          return {
-            title: document.getElementById('fP' + i + 'Title').value,
-            desc: document.getElementById('fP' + i + 'Desc').value,
-            image: imageOverrides[i] || document.getElementById('prev' + i).src
-          };
-        }),
-        contacts: {
-          email: document.getElementById('fEmail').value,
-          telegram: document.getElementById('fTelegram').value,
-          whatsapp: document.getElementById('fWhatsapp').value,
-          bot: document.getElementById('fBot').value,
-          site: document.getElementById('fSite').value,
-          max: document.getElementById('fMax').value,
-          vk: document.getElementById('fVk').value
-        }
-      };
-
-      return fetch('/api/content', {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify(payload),
-      });
+    fetch('/api/content', {
+      method: 'POST',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
     }).then(function (r) {
       if (r.ok) {
         status.textContent = 'Сохранено и опубликовано.';
         status.className = 'status-msg ok';
-        pendingImages = {};
       } else {
         status.textContent = 'Ошибка сохранения.';
         status.className = 'status-msg error';
