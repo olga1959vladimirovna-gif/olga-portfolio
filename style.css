@@ -241,6 +241,12 @@ h1, h2, h3 {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.portfolio-item img:hover {
+  opacity: 0.85;
 }
 
 .portfolio-item h3,
