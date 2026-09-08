@@ -553,6 +553,45 @@ h1, h2, h3 {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+.lightbox-audio {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 32px;
+  max-width: 400px;
+  width: 90vw;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-audio[hidden] {
+  display: none;
+}
+
+.lightbox-audio-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.lightbox-audio-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.lightbox-audio audio {
+  width: 100%;
+}
+
+.thumb-audio {
+  background: linear-gradient(160deg, var(--aqua), var(--teal));
+}
+
+.audio-note-icon {
+  font-size: 40px;
+}
+
 .lightbox-close,
 .lightbox-nav {
   position: absolute;

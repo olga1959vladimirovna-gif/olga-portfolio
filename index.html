@@ -151,6 +151,11 @@
     <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
     <video class="lightbox-img" id="lightboxVideo" controls playsinline hidden></video>
+    <div class="lightbox-audio" id="lightboxAudioBox" hidden>
+      <div class="lightbox-audio-icon">🎵</div>
+      <div class="lightbox-audio-title" id="lightboxAudioTitle"></div>
+      <audio id="lightboxAudio" controls></audio>
+    </div>
     <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее фото">›</button>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
@@ -172,23 +177,37 @@
       var prevBtn = document.getElementById('lightboxPrev');
       var nextBtn = document.getElementById('lightboxNext');
       var closeBtn = document.getElementById('lightboxClose');
+      var lightboxAudioBox = document.getElementById('lightboxAudioBox');
+      var lightboxAudio = document.getElementById('lightboxAudio');
+      var lightboxAudioTitle = document.getElementById('lightboxAudioTitle');
       var images = [];
       var index = 0;
+      var currentTitle = '';
 
       function isVideo(url) {
         return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url);
       }
 
+      function isAudio(url) {
+        return /\.(mp3|wav|m4a|ogg|aac)(\?|$)/i.test(url);
+      }
+
       function show() {
         lightboxVideo.pause();
+        lightboxAudio.pause();
         var url = images[index];
+        lightboxImg.hidden = true;
+        lightboxVideo.hidden = true;
+        lightboxAudioBox.hidden = true;
+        lightboxVideo.removeAttribute('src');
         if (isVideo(url)) {
-          lightboxImg.hidden = true;
           lightboxVideo.hidden = false;
           lightboxVideo.src = url;
+        } else if (isAudio(url)) {
+          lightboxAudioBox.hidden = false;
+          lightboxAudio.src = url;
+          lightboxAudioTitle.textContent = currentTitle;
         } else {
-          lightboxVideo.hidden = true;
-          lightboxVideo.removeAttribute('src');
           lightboxImg.hidden = false;
           lightboxImg.src = url;
         }
@@ -199,9 +218,10 @@
         counter.textContent = (index + 1) + ' / ' + images.length;
       }
 
-      function open(list) {
+      function open(list, title) {
         images = list;
         index = 0;
+        currentTitle = title || '';
         lightbox.hidden = false;
         document.body.style.overflow = 'hidden';
         show();
@@ -209,13 +229,14 @@
 
       function close() {
         lightboxVideo.pause();
+        lightboxAudio.pause();
         lightbox.hidden = true;
         document.body.style.overflow = '';
       }
 
       document.addEventListener('click', function (e) {
         var el = e.target.closest('[data-gallery]');
-        if (el) open(el.getAttribute('data-gallery').split(','));
+        if (el) open(el.getAttribute('data-gallery').split(','), el.getAttribute('data-title'));
       });
 
       prevBtn.addEventListener('click', function () { index = (index - 1 + images.length) % images.length; show(); });
@@ -364,6 +385,7 @@
               btn.type = 'button';
               btn.className = 'card portfolio-item';
               btn.setAttribute('data-gallery', images.join(','));
+              btn.setAttribute('data-title', w.title || '');
               var thumb = document.createElement('span');
               thumb.className = 'thumb';
               if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(images[0])) {
@@ -380,6 +402,12 @@
                 playIcon.className = 'video-play-icon';
                 playIcon.textContent = '▶';
                 thumb.appendChild(playIcon);
+              } else if (/\.(mp3|wav|m4a|ogg|aac)(\?|$)/i.test(images[0])) {
+                thumb.classList.add('thumb-audio');
+                var noteIcon = document.createElement('span');
+                noteIcon.className = 'audio-note-icon';
+                noteIcon.textContent = '🎵';
+                thumb.appendChild(noteIcon);
               } else {
                 var img = document.createElement('img');
                 img.src = images[0];
