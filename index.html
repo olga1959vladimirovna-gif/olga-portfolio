@@ -150,6 +150,7 @@
     <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</button>
     <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <video class="lightbox-img" id="lightboxVideo" controls playsinline hidden></video>
     <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее фото">›</button>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
@@ -166,6 +167,7 @@
     (function () {
       var lightbox = document.getElementById('lightbox');
       var lightboxImg = document.getElementById('lightboxImg');
+      var lightboxVideo = document.getElementById('lightboxVideo');
       var counter = document.getElementById('lightboxCounter');
       var prevBtn = document.getElementById('lightboxPrev');
       var nextBtn = document.getElementById('lightboxNext');
@@ -173,8 +175,23 @@
       var images = [];
       var index = 0;
 
+      function isVideo(url) {
+        return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url);
+      }
+
       function show() {
-        lightboxImg.src = images[index];
+        lightboxVideo.pause();
+        var url = images[index];
+        if (isVideo(url)) {
+          lightboxImg.hidden = true;
+          lightboxVideo.hidden = false;
+          lightboxVideo.src = url;
+        } else {
+          lightboxVideo.hidden = true;
+          lightboxVideo.removeAttribute('src');
+          lightboxImg.hidden = false;
+          lightboxImg.src = url;
+        }
         var multi = images.length > 1;
         prevBtn.hidden = !multi;
         nextBtn.hidden = !multi;
@@ -191,6 +208,7 @@
       }
 
       function close() {
+        lightboxVideo.pause();
         lightbox.hidden = true;
         document.body.style.overflow = '';
       }
@@ -348,10 +366,18 @@
               btn.setAttribute('data-gallery', images.join(','));
               var thumb = document.createElement('span');
               thumb.className = 'thumb';
-              var img = document.createElement('img');
-              img.src = images[0];
-              img.alt = w.title || '';
-              thumb.appendChild(img);
+              if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(images[0])) {
+                var vid = document.createElement('video');
+                vid.src = images[0];
+                vid.muted = true;
+                vid.setAttribute('preload', 'metadata');
+                thumb.appendChild(vid);
+              } else {
+                var img = document.createElement('img');
+                img.src = images[0];
+                img.alt = w.title || '';
+                thumb.appendChild(img);
+              }
               var h3 = document.createElement('h3');
               h3.textContent = w.title || '';
               var p = document.createElement('p');

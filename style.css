@@ -356,7 +356,8 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-.portfolio-item img {
+.portfolio-item img,
+.portfolio-item video {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
