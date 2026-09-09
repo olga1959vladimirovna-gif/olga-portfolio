@@ -572,6 +572,19 @@ h1, h2, h3 {
   margin-bottom: 12px;
 }
 
+.lightbox-audio-cover {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.lightbox-audio-cover[hidden] {
+  display: none;
+}
+
 .lightbox-audio-title {
   font-family: 'Fraunces', serif;
   font-size: 18px;

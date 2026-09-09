@@ -420,6 +420,15 @@
           '<input type="file" accept="image/*" data-add-image="' + w.id + '">';
         card.appendChild(fileGroup);
 
+        var coverGroup = document.createElement('div');
+        coverGroup.className = 'field-group';
+        var coverPreview = w.cover ? '<img class="thumb-preview" src="' + escapeAttr(w.cover) + '" style="max-width:120px;height:120px">' : '';
+        coverGroup.innerHTML = '<label>Обложка (для видео/аудио — необязательно, показывается вместо иконки)</label>' +
+          coverPreview +
+          '<input type="file" accept="image/*" data-add-cover="' + w.id + '">' +
+          (w.cover ? '<button type="button" class="secondary" data-remove-cover="' + w.id + '" style="margin-top:8px">Убрать обложку</button>' : '');
+        card.appendChild(coverGroup);
+
         var tagGroup = document.createElement('div');
         tagGroup.className = 'field-group';
         var tagOptions = '<option value="">— без подкатегории —</option>' + cat.tags.map(function (t) {
@@ -484,6 +493,12 @@
       if (w) { w.images.splice(parseInt(parts[1], 10), 1); renderWorks(); }
       return;
     }
+    var rmCover = e.target.closest('[data-remove-cover]');
+    if (rmCover) {
+      var wc = works.find(function (x) { return x.id === rmCover.getAttribute('data-remove-cover'); });
+      if (wc) { delete wc.cover; renderWorks(); }
+      return;
+    }
   });
 
   document.getElementById('worksByCategory').addEventListener('input', function (e) {
@@ -493,10 +508,7 @@
     if (w) w[field.getAttribute('data-field')] = field.value;
   });
 
-  document.getElementById('worksByCategory').addEventListener('change', function (e) {
-    var fileInput = e.target.closest('[data-add-image]');
-    if (!fileInput) return;
-    var workId = fileInput.getAttribute('data-add-image');
+  function uploadWorkImage(fileInput, workId, onSuccess) {
     var file = fileInput.files[0];
     if (!file) return;
     if (file.size > 3 * 1024 * 1024) {
@@ -517,7 +529,7 @@
         .then(function (d) {
           if (d.url) {
             var w = works.find(function (x) { return x.id === workId; });
-            if (w) { w.images = w.images || []; w.images.push(d.url); }
+            if (w) onSuccess(w, d.url);
           } else {
             alert('Ошибка загрузки: ' + (d.error || 'попробуйте ещё раз'));
           }
@@ -529,6 +541,24 @@
         });
     };
     reader.readAsDataURL(file);
+  }
+
+  document.getElementById('worksByCategory').addEventListener('change', function (e) {
+    var imgInput = e.target.closest('[data-add-image]');
+    if (imgInput) {
+      uploadWorkImage(imgInput, imgInput.getAttribute('data-add-image'), function (w, url) {
+        w.images = w.images || [];
+        w.images.push(url);
+      });
+      return;
+    }
+    var coverInput = e.target.closest('[data-add-cover]');
+    if (coverInput) {
+      uploadWorkImage(coverInput, coverInput.getAttribute('data-add-cover'), function (w, url) {
+        w.cover = url;
+      });
+      return;
+    }
   });
 
   function loadContent() {

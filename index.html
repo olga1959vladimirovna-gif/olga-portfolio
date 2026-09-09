@@ -152,7 +152,8 @@
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
     <video class="lightbox-img" id="lightboxVideo" controls playsinline hidden></video>
     <div class="lightbox-audio" id="lightboxAudioBox" hidden>
-      <div class="lightbox-audio-icon">🎵</div>
+      <div class="lightbox-audio-icon" id="lightboxAudioIcon">🎵</div>
+      <img class="lightbox-audio-cover" id="lightboxAudioCover" hidden alt="">
       <div class="lightbox-audio-title" id="lightboxAudioTitle"></div>
       <audio id="lightboxAudio" controls></audio>
     </div>
@@ -180,9 +181,12 @@
       var lightboxAudioBox = document.getElementById('lightboxAudioBox');
       var lightboxAudio = document.getElementById('lightboxAudio');
       var lightboxAudioTitle = document.getElementById('lightboxAudioTitle');
+      var lightboxAudioIcon = document.getElementById('lightboxAudioIcon');
+      var lightboxAudioCover = document.getElementById('lightboxAudioCover');
       var images = [];
       var index = 0;
       var currentTitle = '';
+      var currentCover = '';
 
       function isVideo(url) {
         return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url);
@@ -207,6 +211,14 @@
           lightboxAudioBox.hidden = false;
           lightboxAudio.src = url;
           lightboxAudioTitle.textContent = currentTitle;
+          if (currentCover) {
+            lightboxAudioIcon.hidden = true;
+            lightboxAudioCover.hidden = false;
+            lightboxAudioCover.src = currentCover;
+          } else {
+            lightboxAudioIcon.hidden = false;
+            lightboxAudioCover.hidden = true;
+          }
         } else {
           lightboxImg.hidden = false;
           lightboxImg.src = url;
@@ -218,10 +230,11 @@
         counter.textContent = (index + 1) + ' / ' + images.length;
       }
 
-      function open(list, title) {
+      function open(list, title, cover) {
         images = list;
         index = 0;
         currentTitle = title || '';
+        currentCover = cover || '';
         lightbox.hidden = false;
         document.body.style.overflow = 'hidden';
         show();
@@ -236,7 +249,7 @@
 
       document.addEventListener('click', function (e) {
         var el = e.target.closest('[data-gallery]');
-        if (el) open(el.getAttribute('data-gallery').split(','), el.getAttribute('data-title'));
+        if (el) open(el.getAttribute('data-gallery').split(','), el.getAttribute('data-title'), el.getAttribute('data-cover'));
       });
 
       prevBtn.addEventListener('click', function () { index = (index - 1 + images.length) % images.length; show(); });
@@ -386,9 +399,21 @@
               btn.className = 'card portfolio-item';
               btn.setAttribute('data-gallery', images.join(','));
               btn.setAttribute('data-title', w.title || '');
+              if (w.cover) btn.setAttribute('data-cover', w.cover);
               var thumb = document.createElement('span');
               thumb.className = 'thumb';
-              if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(images[0])) {
+              if (w.cover) {
+                var coverImg = document.createElement('img');
+                coverImg.src = w.cover;
+                coverImg.alt = w.title || '';
+                thumb.appendChild(coverImg);
+                if (/\.(mp3|wav|m4a|ogg|aac)(\?|$)/i.test(images[0])) {
+                  var noteBadge = document.createElement('span');
+                  noteBadge.className = 'video-play-icon';
+                  noteBadge.textContent = '♪';
+                  thumb.appendChild(noteBadge);
+                }
+              } else if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(images[0])) {
                 var vid = document.createElement('video');
                 vid.src = images[0] + '#t=0.1';
                 vid.muted = true;
